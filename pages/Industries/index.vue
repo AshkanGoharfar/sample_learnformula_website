@@ -5,8 +5,6 @@
       Take Control over your Career through Professional Development Courses,
       Packages and Certificate Programs
     </h5>
-
-    <!-- v-on:search-text since we are emitting something like search.text we use v-on:search-text="searchText" -->
     <SearchIndustries v-on:search-text="searchText" />
 
     <div
@@ -22,7 +20,18 @@
       />
     </div>
     <h4>Popular designations</h4>
-    <v-chip class="ma-2" color="red" text-color="white"> Red Chip </v-chip>
+    <br />
+    <v-row class="ma-4" justify="center" margin="3px">
+      <v-chip
+        v-for="industry in industriesData.industries"
+        :key="industry.id"
+        class="ma-2"
+        outlined
+        color="trasnparent"
+      >
+        {{ industry.joke.split(/\s+/)[0] }}
+      </v-chip>
+    </v-row>
   </div>
 </template>
 
@@ -103,12 +112,14 @@ export default {
 
 <style>
 .popular-designation {
-  display: flex;
+  /* display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px dotted #ccc;
+  padding-bottom: 1rem; */
+
+  /* border-bottom: 1px dotted #ccc; */
 }
 .header .title {
   font-size: 1rem;
@@ -127,5 +138,8 @@ export default {
 .title {
   font-size: 0.7rem;
   font-weight: normal;
+}
+.ma-2 {
+  margin: 5px 5px 5px 5px;
 }
 </style>
