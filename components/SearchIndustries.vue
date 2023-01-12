@@ -1,7 +1,18 @@
 <template>
   <form @submit.prevent="onSubmit">
-    <input type="text" v-model="text" placeholder="Search Industries..." />
-    <input type="submit" value="Search Industries" />
+    <input
+      class="search-box"
+      type="text"
+      v-model="text"
+      placeholder="Search Industries..."
+    />
+    <button type="submit">
+      <img
+        src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/search-24.png"
+        alt="buttonpng"
+        border="0"
+      />
+    </button>
   </form>
 </template>
 
@@ -24,4 +35,11 @@ export default {
 </script>
 
 <style>
+.search-box {
+  border: 1px solid lightgray;
+  width: 60%;
+  height: 40px;
+  padding-left: 20px;
+  border-radius: 20px;
+}
 </style>
