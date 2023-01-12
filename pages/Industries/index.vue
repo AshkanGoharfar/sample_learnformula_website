@@ -1,16 +1,28 @@
 <template>
   <div>
+    <h2>Welcome to the most reputed online learning platform on the web</h2>
+    <h5 class="title">
+      Take Control over your Career through Professional Development Courses,
+      Packages and Certificate Programs
+    </h5>
+
     <!-- v-on:search-text since we are emitting something like search.text we use v-on:search-text="searchText" -->
     <SearchIndustries v-on:search-text="searchText" />
 
-    <div v-if="industries.length !== 20">
+    <div
+      v-if="
+        industriesData.industries.length < industriesData.totalNumOfIndustries
+      "
+    >
       <Industry
-        v-for="industry in industries"
+        v-for="industry in industriesData.industries"
         :key="industry.id"
         :id="industry.id"
         :industry="industry.joke"
       />
     </div>
+    <h4>Popular designations</h4>
+    <v-chip class="ma-2" color="red" text-color="white"> Red Chip </v-chip>
   </div>
 </template>
 
@@ -26,7 +38,10 @@ export default {
   },
   data() {
     return {
-      industries: [],
+      industriesData: {
+        industries: [],
+        totalNumOfIndustries: 0,
+      },
     };
   },
 
@@ -43,7 +58,8 @@ export default {
     try {
       const res = await axios.get("https://icanhazdadjoke.com/search", config);
 
-      this.industries = res.data.results;
+      this.industriesData.industries = res.data.results;
+      this.industriesData.totalNumOfIndustries = res.data.results.length;
     } catch (err) {
       console.log(err);
     }
@@ -63,7 +79,7 @@ export default {
           config
         );
 
-        this.industries = res.data.results;
+        this.industriesData.industries = res.data.results;
       } catch (err) {
         console.log(err);
       }
@@ -86,4 +102,30 @@ export default {
 </script>
 
 <style>
+.popular-designation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dotted #ccc;
+}
+.header .title {
+  font-size: 1rem;
+  color: #526488;
+}
+.header ul {
+  display: flex;
+}
+.header a {
+  display: inline-block;
+  background: #333;
+  color: #fff;
+  padding: 0.3rem 1rem;
+  margin-right: 0.5rem;
+}
+.title {
+  font-size: 0.7rem;
+  font-weight: normal;
+}
 </style>
