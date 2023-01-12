@@ -17,12 +17,9 @@
             src="https://dbtkvjd5m619u.cloudfront.net/images/markets/logos/d74694e4f025704e1254d20c3bd1ca65.png"
             alt=""
           />
-          <h2 class="card-title center">Title</h2>
+          <h2 class="card-title center">{{ industry.split(/\s+/)[1] }}</h2>
           <p class="card-text">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Distinctio, eveniet. Lorem ipsum dolor sit amet, consectetur
-            adipisicing elit. Distinctio, eveniet. Lorem ipsum dolor sit amet,
-            consectetur adipisicing elit. Distinctio, eveniet.
+            {{ industry }}
           </p>
           <div class="card-footer center">
             <a class="btn" href="">Details</a>
