@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-show="isLoaded">
     <h2>Welcome to the most reputed online learning platform on the web</h2>
     <h5 class="title">
       Take Control over your Career through Professional Development Courses,
@@ -9,11 +9,12 @@
     <br />
     <SearchIndustries v-on:search-text="searchText" />
 
-    <div
+    <!-- <div
       v-if="
         industriesData.industries.length < industriesData.totalNumOfIndustries
       "
-    >
+    > -->
+    <div v-show="isSearched">
       <Industry
         v-for="industry in industriesData.industries"
         :key="industry.id"
@@ -23,6 +24,7 @@
     </div>
     <br />
     <br />
+    <v-spacer />
     <h4>Popular designations</h4>
     <br />
     <v-row class="ma-4" justify="center" margin="3px">
@@ -39,12 +41,24 @@
     </v-row>
     <br />
 
-    <CourseCard
+    <!-- <CourseCard
       v-for="industry in industriesData.industries"
       :key="industry.id"
       :id="industry.id"
       :industry="industry.joke"
-    />
+    /> -->
+
+    <v-row>
+      <v-col
+        cols="12"
+        sm="4"
+        lg="3"
+        v-for="industry in industriesData.industries"
+        :key="industry.id"
+      >
+        <CourseCard :id="industry.id" :industry="industry.joke" />
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -64,8 +78,9 @@ export default {
     return {
       industriesData: {
         industries: [],
-        totalNumOfIndustries: 0,
       },
+      isLoaded: false,
+      isSearched: false,
     };
   },
 
@@ -73,40 +88,60 @@ export default {
   async created() {
     // We make config object with header object, this is what we do with axios
     // So in the config we are gonna make our request
-    const config = {
-      headers: {
-        Accept: "application/json",
-      },
-    };
+    // const config = {
+    //   headers: {
+    //     Accept: "application/json",
+    //   },
+    // };
 
-    try {
-      const res = await axios.get("https://icanhazdadjoke.com/search", config);
+    // try {
+    //   const res = await axios.get("https://icanhazdadjoke.com/search", config);
 
-      this.industriesData.industries = res.data.results;
-      this.industriesData.totalNumOfIndustries = res.data.results.length;
-    } catch (err) {
-      console.log(err);
-    }
+    //   this.industriesData.industries = res.data.results;
+    //   this.industriesData.totalNumOfIndustries = res.data.results.length;
+    //   this.isLoaded = true;
+    // } catch (err) {
+    //   console.log(err);
+    // }
+
+    this.$store
+      .dispatch("industry/fetchIndustries", { term: "" })
+      .then((industries) => {
+        console.log("length", typeof industries);
+        this.industriesData.industries = industries;
+        this.isLoaded = true;
+
+        console.log("industries ", this.industriesData.industries);
+      });
   },
 
   methods: {
-    async searchText(text) {
-      const config = {
-        headers: {
-          Accept: "application/json",
-        },
-      };
+    async searchText(term) {
+      // const config = {
+      //   headers: {
+      //     Accept: "application/json",
+      //   },
+      // };
 
-      try {
-        const res = await axios.get(
-          `https://icanhazdadjoke.com/search?term=${text}`,
-          config
-        );
+      // try {
+      //   const res = await axios.get(
+      //     `https://icanhazdadjoke.com/search?term=${text}`,
+      //     config
+      //   );
 
-        this.industriesData.industries = res.data.results;
-      } catch (err) {
-        console.log(err);
-      }
+      //   this.industriesData.industries = res.data.results;
+      // } catch (err) {
+      //   console.log(err);
+      // }
+
+      this.$store
+        .dispatch("industry/fetchIndustries", { term: term })
+        .then((industries) => {
+          console.log("length", typeof industries);
+          this.industriesData.industries = industries;
+          this.isSearched = true;
+          console.log("industries ", this.industriesData.industries);
+        });
     },
   },
 

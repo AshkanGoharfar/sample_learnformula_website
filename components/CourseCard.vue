@@ -2,14 +2,6 @@
   <!-- we are gonna wrap div to nuxt-link, for routing to the industry page  -->
   <nuxt-link :to="'industries/' + id">
     <div class="course-card">
-      <!-- <p>
-        {{ industry }}
-      </p>
-      <p>11</p>
-      <img
-        src="https://dbtkvjd5m619u.cloudfront.net/images/markets/logos/d74694e4f025704e1254d20c3bd1ca65.png"
-      /> -->
-
       <div class="card-item">
         <div class="card-body">
           <img
@@ -19,11 +11,15 @@
           />
           <h2 class="card-title center">{{ industry.split(/\s+/)[1] }}</h2>
           <p class="card-text">
-            {{ industry }}
+            {{
+              industry.length > 100
+                ? (industry = industry.substring(0, 100) + "...")
+                : industry
+            }}
           </p>
-          <div class="card-footer center">
+          <!-- <div class="card-footer center">
             <a class="btn" href="">Details</a>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -41,6 +37,7 @@ export default {
 
 <style>
 .course-card {
+  /* height: 380px; */
   /* padding: 1rem; */
   /* border: 1px dotted #ccc; */
 
@@ -51,31 +48,33 @@ export default {
 .card-item {
   display: flex;
   width: 100%;
-  padding: 0.5em;
+  height: 420px;
+  /* padding: 0.5em; */
 }
 
 /* ===== == = === 37.5em (600px) === = == ===== */
-@media all and (min-width: 37.5em) {
+/* @media all and (min-width: 37.5em) {
   .card-item {
     width: calc(100% / 12 * 6);
   }
-}
+} */
 /* ===== == = === 56.25em (900px) === = == ===== */
-@media all and (min-width: 56.25em) {
+/* @media all and (min-width: 56.25em) {
   .card-item {
     width: calc(100% / 12 * 4);
   }
-}
+} */
 
 .card-body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   width: 100%;
-  padding: 0;
-  background-color: #f8fff8;
-  border-radius: 3px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  height: 400px;
+  /* padding: 0; */
+  background-color: transparent;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 .card-body p {
@@ -85,6 +84,7 @@ export default {
 
 .card-img {
   width: 100%;
+  max-height: 220px;
   border-radius: 3px 3px 0 0;
   border-bottom-left-radius: 35px;
 }
@@ -93,12 +93,13 @@ export default {
   opacity: 0.8;
 }
 
-.card-title,
-.card-text,
-.card-footer {
-  padding: 1em 1em 0;
+.card-title {
+  margin: 1rem;
 }
-
+.card-text {
+  padding: 0rem 1rem 1rem 1rem;
+}
+.card-footer,
 .card-footer {
   margin-bottom: 1em;
 }
@@ -106,7 +107,7 @@ export default {
 .btn {
   display: inline-block;
   margin: 1rem;
-  padding: 0.75rem 1.25rem;
+  /* padding: 0.75rem 1.25rem; */
   font: 700 1rem/1.2 Verdana, sans-serif;
   letter-spacing: 0.05rem;
   text-decoration: none;

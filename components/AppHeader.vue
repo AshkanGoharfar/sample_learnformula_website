@@ -33,6 +33,7 @@ export default {
 .header .title {
   font-size: 1rem;
   color: #526488;
+  margin-right: 5px;
 }
 .header ul {
   display: flex;

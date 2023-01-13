@@ -34,8 +34,34 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
-
+  axios: {
+    baseURL: "https://api.decentrawow.com"
+  },
+  auth: {
+    strategies: {
+      local: {
+        redirect: {
+          login: '/index'
+        },
+        token: {
+          property: 'body',
+          type: false
+        },
+        user: {
+          property: 'body'
+        },
+        endpoints: {
+          login: { url: 'login', method: 'post' },
+          user: { url: 'wow/get_info', method: 'get' },
+          // user: { url: 'me', method: 'get', propertyName: 'data' },
+          logout: false
+        }
+      }
+    }
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }
