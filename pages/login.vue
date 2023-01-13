@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-flex full-width>
     <h1>Sign in</h1>
     <v-text-field
       v-model="username"
@@ -15,9 +15,21 @@
       required
     ></v-text-field>
 
-    <v-btn color="success" @click="login"> Login </v-btn>
+    <v-btn
+      :style="{
+        backgroundColor: 'rgba(80,52,244, 1)',
+        borderRadius: '20px',
+        color: 'white',
+        marginLeft: '5px',
+        marginTop: '25px',
+      }"
+      color="success"
+      @click="login"
+    >
+      Login
+    </v-btn>
     <!--  <UserAuthForm buttonText="Sign in" :submitForm="LoginUser" /> -->
-  </v-container>
+  </v-flex>
 </template>
 
 <script>

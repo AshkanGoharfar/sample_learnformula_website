@@ -1,5 +1,5 @@
 <template>
-  <div v-show="isLoaded">
+  <v-flex full-width v-show="isLoaded">
     <h2>Welcome to the most reputed online learning platform on the web</h2>
     <h5 class="title">
       Take Control over your Career through Professional Development Courses,
@@ -40,7 +40,7 @@
       </v-chip>
     </v-row>
     <br />
-
+    <br />
     <!-- <CourseCard
       v-for="industry in industriesData.industries"
       :key="industry.id"
@@ -59,7 +59,7 @@
         <CourseCard :id="industry.id" :industry="industry.joke" />
       </v-col>
     </v-row>
-  </div>
+  </v-flex>
 </template>
 
 <script>

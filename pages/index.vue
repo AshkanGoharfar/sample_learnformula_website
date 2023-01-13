@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <v-container>
     <h2>Welcome to the most reputed online learning platform on the web</h2>
-  </div>
+  </v-container>
 </template>
 
 <script>

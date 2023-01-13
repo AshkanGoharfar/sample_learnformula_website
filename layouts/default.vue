@@ -1,11 +1,11 @@
 <template>
-  <div class="container">
-    <!-- <AppHeader /> -->
+  <v-container fluid class="container">
+    <AppHeader />
 
     <!-- User Auth -->
     <!-- If true then we are gonna display username and logout button -->
 
-    <div v-if="$auth.loggedIn">
+    <v-flex full-width v-if="$auth.loggedIn">
       {{ $auth.user.email }}
       <v-btn
         @click="
@@ -14,14 +14,21 @@
             refresh();
           }
         "
+        :style="{
+          float: 'right',
+          backgroundColor: 'rgba(80,52,244, 1)',
+          borderRadius: '20px',
+          color: 'white',
+          marginLeft: '5px',
+        }"
         text
         >Logout</v-btn
       >
-    </div>
+    </v-flex>
 
     <!-- Else we will display login and register buttons -->
 
-    <div v-else>
+    <!-- <div v-else>
       <v-btn
         textColor="green"
         :style="{
@@ -35,19 +42,22 @@
         to="/register"
         >Get started</v-btn
       >
-    </div>
+    </div> -->
     <v-btn
       v-if="!$auth.loggedIn"
       :style="{
         float: 'right',
+        backgroundColor: 'rgba(80,52,244, 1)',
         borderRadius: '20px',
+        color: 'white',
+        marginLeft: '5px',
       }"
       text
       to="/login"
       >Sign in</v-btn
     >
     <nuxt />
-  </div>
+  </v-container>
 </template>
 
 <script>
